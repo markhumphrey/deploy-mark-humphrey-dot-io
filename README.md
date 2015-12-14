@@ -1,5 +1,23 @@
 # deploy-mark-humphrey-dot-io
 
+## Contents
+
+Docker Compose base service definition file
+```
+docker-compose.yml
+```
+
+Docker Compose override definition files
+```
+docker-compose.dev.yml
+docker-compose.prod.yml
+```
+
+AWS Elastic Beanstalk multi-container service definition file
+```
+Dockerrun.aws.json
+```
+
 ## Dependencies
 
 * Docker
@@ -20,23 +38,40 @@ production container images will be pulled from DockerHub.
 git clone git@github.com:markhumphrey/api-mark-humphrey-dot-io.git
 git clone git@github.com:markhumphrey/www-mark-humphrey-dot-io.git
 ```
-## Contents
 
-Docker Compose base service definition file
-```
-docker-compose.yml
-```
+Install Docker Compose and dependencies:
+https://docs.docker.com/compose/install/
 
-Docker Compose override definition files
+## Start Docker Machine
+
+To run:
 ```
-docker-compose.dev.yml
-docker-compose.prod.yml
+docker-machine start default
 ```
 
-AWS Elastic Beanstalk multi-container service definition file
+Display the environment settings for that machine:
+
 ```
-Dockerrun.aws.json
+docker-machine env default
 ```
+
+Should produce output similar to:
+
+```
+export DOCKER_TLS_VERIFY="1"
+export DOCKER_HOST="tcp://192.168.99.100:2376"
+export DOCKER_CERT_PATH="/Users/mhumphrey/.docker/machine/machines/default"
+export DOCKER_MACHINE_NAME="default"
+# Run this command to configure your shell: 
+# eval "$(docker-machine env default)"
+```
+
+Run the eval command in each shell that you will be using docker or docker-compose commands in:
+```
+eval "$(docker-machine env default)"
+```
+
+The DOCKER_HOST ip address is the address you will use when connecting to your running docker services.
 
 ## Build containers locally
 To build all:
