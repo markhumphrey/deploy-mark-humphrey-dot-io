@@ -1,0 +1,16 @@
+www:
+  image: markhumphrey/www-mark-humphrey-dot-io
+  ports:
+    - "80:80"
+  links:
+    - api
+api:
+  image: markhumphrey/api-mark-humphrey-dot-io
+  ports:
+   - "8080:8080"
+  links:
+   - sql
+sql:
+  image: markhumphrey/sql-mark-humphrey-dot-io
+  ports:
+   - "3306:3306"
