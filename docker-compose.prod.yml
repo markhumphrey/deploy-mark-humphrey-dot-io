@@ -1,5 +1,12 @@
 www:
-
+  build: ../www-mark-humphrey-dot-io
+  dockerfile: Dockerfile
 api:
-
+  build: ../api-mark-humphrey-dot-io
+  dockerfile: Dockerfile-api
 sql:
+  build: ../api-mark-humphrey-dot-io
+  dockerfile: Dockerfile-sql
+  environment:
+    MYSQL_DATABASE: database
+    MYSQL_ROOT_PASSWORD: admin123

@@ -13,13 +13,11 @@ api:
   # entrypoint can't see volumes e.g. /code for some reason
   # for now clear out entrypoint and use command for development
   entrypoint: []
-  # command: /env/bin/python /code/main.py
-  command: /env/bin/uwsgi --py-autoreload=1 /code/uwsgi.ini
+  # command: /venv/bin/python /code/main.py
+  command: /venv/bin/uwsgi --py-autoreload=1 /code/uwsgi.ini
 sql:
   build: ../api-mark-humphrey-dot-io
   dockerfile: Dockerfile-sql
   environment:
     MYSQL_DATABASE: database
-    MYSQL_USER: root
-    MYSQL_PASSWORD: admin123
     MYSQL_ROOT_PASSWORD: admin123

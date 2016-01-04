@@ -62,7 +62,7 @@ export DOCKER_TLS_VERIFY="1"
 export DOCKER_HOST="tcp://192.168.99.100:2376"
 export DOCKER_CERT_PATH="/Users/mhumphrey/.docker/machine/machines/default"
 export DOCKER_MACHINE_NAME="default"
-# Run this command to configure your shell: 
+# Run this command to configure your shell:
 # eval "$(docker-machine env default)"
 ```
 
@@ -102,7 +102,7 @@ First run containers:
 docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 ```
 
-Should see some output at the top simlar to:
+Should see some output at the top similar to:
 ```
 Starting deploymarkhumphreydotio_sql_1
 Starting deploymarkhumphreydotio_api_1
@@ -115,5 +115,65 @@ Copy the container name that you would like to connect to and specify a command 
 docker exec -it deploymarkhumphreydotio_www_1 bash
 ```
 
+## Push new production image to DockerHub
+To build production containers locally:
+```
+cd deploy-mark-humphrey-dot-io
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml build
+```
+
+To run production containers locally:
+```
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+```
+
+To push production containers to DockerHub:
+First tag built production image:
+```
+docker tag <image> <tag>
+```
+
+For example:
+```
+docker tag 59f55c59fcbf markhumphrey/www-mark-humphrey-dot-io:latest
+```
+
+To log into DockerHub from the command line:
+```
+docker login --username=markhumphrey
+```
+
+To push image to the repository:
+```
+docker push markhumphrey/www-mark-humphrey-dot-io
+```
+
 ## Deploy to AWS Elastic Beanstalk
+
+https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_ecs.html
+
+Create local configuration in .elasticbeanstalk/:
+```
+eb init
+```
+
+To run production containers locally:
+```
+eb local run
+```
+
+To display information about the running containers:
+```
+eb local status
+```
+
+This gives the container ip as 127.0.0.1 and ```eb local open``` will launch
+a browser with this address. However, on OS X it seems the correct address is
+the docker-machine produced DOCKER_HOST that is used with docker-compose above.
+
+To deploy to AWS use the following instructions and specify the single
+```Dockerrun.aws.json``` file:
+
+http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_ecstutorial.html#create_deploy_docker_ecstutorial_deploy
+
 TODO

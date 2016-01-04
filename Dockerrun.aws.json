@@ -10,14 +10,54 @@
   ],
   "containerDefinitions": [
     {
-      "name": "web",
-      "image": "markhumphrey/flask-app-template",
+      "name": "www",
+      "image": "markhumphrey/www-mark-humphrey-dot-io",
       "essential": true,
       "memory": 128,
       "portMappings": [
         {
           "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links" : [
+        "api"
+      ]
+    },
+    {
+      "name": "api",
+      "image": "markhumphrey/api-mark-humphrey-dot-io",
+      "essential": true,
+      "memory": 128,
+      "portMappings": [
+        {
+          "hostPort": 8080,
           "containerPort": 8080
+        }
+      ],
+      "links" : [
+        "sql"
+      ]
+    },
+    {
+      "name": "sql",
+      "image": "markhumphrey/sql-mark-humphrey-dot-io",
+      "essential": true,
+      "memory": 128,
+      "portMappings": [
+        {
+          "hostPort": 3306,
+          "containerPort": 3306
+        }
+      ],
+      "environment": [
+        {
+          "name": "MYSQL_DATABASE",
+          "value": "database"
+        },
+        {
+          "name": "MYSQL_ROOT_PASSWORD",
+          "value": "admin123"
         }
       ]
     }
