@@ -186,7 +186,3 @@ the AWS ECS Task Definitions console.
 
 IMPORTANT: Need to manually go into the AWS ui and mark any data container tasks
 which exit immediately as ```essential: false``` or the AWS task will terminate
-
-IMPORTANT: Need to manually go into the AWS ui and specify cpu on containers
-or the AWS task will terminate. TODO: Find what docker-compose setting AWS is
-parsing cpu from.

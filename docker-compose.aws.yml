@@ -1,6 +1,7 @@
 www:
   image: markhumphrey/www-mark-humphrey-dot-io
   mem_limit: 300000000
+  cpu_shares: 1
   ports:
     - "80:80"
   volumes_from:
@@ -10,9 +11,11 @@ www:
 www-data:
   image: markhumphrey/www-data-mark-humphrey-dot-io
   mem_limit: 128000000
+  cpu_shares: 1
 api:
   image: markhumphrey/api-mark-humphrey-dot-io
   mem_limit: 300000000
+  cpu_shares: 1
   ports:
    - "8080:8080"
   links:
@@ -20,6 +23,7 @@ api:
 sql:
   image: markhumphrey/sql-mark-humphrey-dot-io
   mem_limit: 300000000
+  cpu_shares: 1
   ports:
    - "3306:3306"
   environment:
