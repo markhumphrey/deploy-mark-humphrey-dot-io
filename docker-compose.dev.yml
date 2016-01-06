@@ -6,9 +6,7 @@ www-data:
     - ../www-mark-humphrey-dot-io/:/app
 api:
   volumes:
-   - ../api-mark-humphrey-dot-io:/code:ro
-  # entrypoint can't see volumes e.g. /code for some reason
-  # for now clear out entrypoint and use command for development
-  entrypoint: []
-  # command: /venv/bin/python /code/main.py
-  command: /venv/bin/uwsgi --py-autoreload=1 /code/uwsgi.ini
+   - ../api-mark-humphrey-dot-io:/app:ro
+  # pass these additional arguments to entrypoint
+  command:
+   - "--py-autoreload=1"
