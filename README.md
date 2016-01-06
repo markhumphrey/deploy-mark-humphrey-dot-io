@@ -115,6 +115,22 @@ Copy the container name that you would like to connect to and specify a command 
 docker exec -it deploymarkhumphreydotio_www_1 bash
 ```
 
+## Data volume containers
+
+The front end build tooling is not needed in production and would require
+merging the nginx and node official images. It is currently separated out into an
+image that generates build artifacts and exposes as a volume /usr/share/nginx/html
+that is mounted by the nginx container.
+
+IMPORTANT
+When a data volume image that is mounted using volumes_from is changed the nginx
+container needs to be removed in order for docker-compose to reflect the change.
+
+To remove all stopped containers:
+```
+docker-compose -f docker-compose.yml -f docker-compose.prod.yml rm
+```
+
 ## Push new production image to DockerHub
 To build production containers locally:
 ```

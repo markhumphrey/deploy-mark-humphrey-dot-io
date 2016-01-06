@@ -1,15 +1,18 @@
 www:
   build: ../www-mark-humphrey-dot-io
-  dockerfile: Dockerfile
+  dockerfile: Dockerfile-nginx
   volumes:
-    - ../www-mark-humphrey-dot-io/app:/usr/share/nginx/html/static:ro
+    - ../www-mark-humphrey-dot-io/dist:/usr/share/nginx/html:ro
+www-data:
+  build: ../www-mark-humphrey-dot-io
+  dockerfile: Dockerfile-data
+  volumes:
+    - ../www-mark-humphrey-dot-io/:/app
 api:
   build: ../api-mark-humphrey-dot-io
   dockerfile: Dockerfile-api
   volumes:
    - ../api-mark-humphrey-dot-io:/code:ro
-  environment:
-    - NODE_PATH=/app/node_modules
   # entrypoint can't see volumes e.g. /code for some reason
   # for now clear out entrypoint and use command for development
   entrypoint: []
@@ -18,6 +21,3 @@ api:
 sql:
   build: ../api-mark-humphrey-dot-io
   dockerfile: Dockerfile-sql
-  environment:
-    MYSQL_DATABASE: database
-    MYSQL_ROOT_PASSWORD: admin123
