@@ -1,12 +1,8 @@
 www:
-  build: ../www-mark-humphrey-dot-io
-  dockerfile: Dockerfile-nginx
+  image: markhumphrey/www-mark-humphrey-dot-io
 www-data:
-  build: ../www-mark-humphrey-dot-io
-  dockerfile: Dockerfile-data
+  image: markhumphrey/www-data-mark-humphrey-dot-io
 api:
-  build: ../api-mark-humphrey-dot-io
-  dockerfile: Dockerfile-api
+  image: markhumphrey/api-mark-humphrey-dot-io
 sql:
-  build: ../api-mark-humphrey-dot-io
-  dockerfile: Dockerfile-sql
+  image: markhumphrey/sql-mark-humphrey-dot-io

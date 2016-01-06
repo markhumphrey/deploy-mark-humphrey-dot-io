@@ -1,5 +1,6 @@
 www:
-  image: markhumphrey/www-mark-humphrey-dot-io
+  build: ../www-mark-humphrey-dot-io
+  dockerfile: Dockerfile-nginx
   ports:
     - "80:80"
   volumes_from:
@@ -7,15 +8,18 @@ www:
   links:
     - api
 www-data:
-  image: markhumphrey/www-data-mark-humphrey-dot-io
+  build: ../www-mark-humphrey-dot-io
+  dockerfile: Dockerfile-data
 api:
-  image: markhumphrey/api-mark-humphrey-dot-io
+  build: ../api-mark-humphrey-dot-io
+  dockerfile: Dockerfile-api
   ports:
    - "8080:8080"
   links:
    - sql
 sql:
-  image: markhumphrey/sql-mark-humphrey-dot-io
+  build: ../api-mark-humphrey-dot-io
+  dockerfile: Dockerfile-sql
   ports:
    - "3306:3306"
   environment:
