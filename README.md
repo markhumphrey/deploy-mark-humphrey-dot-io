@@ -192,4 +192,30 @@ To deploy to AWS use the following instructions and specify the single
 
 http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_ecstutorial.html#create_deploy_docker_ecstutorial_deploy
 
-TODO
+
+## Deploy to Amazon EC2 Container Service
+http://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html
+http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cmd-ecs-cli-compose.html
+
+Configure AWS ECS cli:
+```
+ecs-cli configure --region "us-east-1" --access-key $AWS_ACCESS_KEY_ID --secret-key $AWS_SECRET_ACCESS_KEY --cluster "www-mark-humphrey-dot-io"
+```
+
+The ecs-cli can generate a task definition from a docker-compose.yml file, but
+some tweaking is necessary so a separate docker-compose.aws.yml is maintained.
+
+Create task definition on cluster:
+```
+ecs-cli compose -f docker-compose.aws.yml -p "www-markhumphrey-dot-io" create
+```
+
+This will create a task named ecscompose-<PROJECT_NAME> that can be viewed in
+the AWS ECS Task Definitions console.
+
+IMPORTANT: Need to manually go into the AWS ui and mark any data container tasks
+which exit immediately as ```essential: false``` or the AWS task will terminate
+
+IMPORTANT: Need to manually go into the AWS ui and specify cpu on containers
+or the AWS task will terminate. TODO: Find what docker-compose setting AWS is
+parsing cpu from.
