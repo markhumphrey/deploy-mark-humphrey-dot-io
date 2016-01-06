@@ -164,35 +164,6 @@ To push image to the repository:
 docker push markhumphrey/www-mark-humphrey-dot-io
 ```
 
-## Deploy to AWS Elastic Beanstalk
-
-https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_ecs.html
-
-Create local configuration in .elasticbeanstalk/:
-```
-eb init
-```
-
-To run production containers locally:
-```
-eb local run
-```
-
-To display information about the running containers:
-```
-eb local status
-```
-
-This gives the container ip as 127.0.0.1 and ```eb local open``` will launch
-a browser with this address. However, on OS X it seems the correct address is
-the docker-machine produced DOCKER_HOST that is used with docker-compose above.
-
-To deploy to AWS use the following instructions and specify the single
-```Dockerrun.aws.json``` file:
-
-http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker_ecstutorial.html#create_deploy_docker_ecstutorial_deploy
-
-
 ## Deploy to Amazon EC2 Container Service
 http://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html
 http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cmd-ecs-cli-compose.html
