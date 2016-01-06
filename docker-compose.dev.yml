@@ -12,5 +12,3 @@ api:
   entrypoint: []
   # command: /venv/bin/python /code/main.py
   command: /venv/bin/uwsgi --py-autoreload=1 /code/uwsgi.ini
-sql:
-  
